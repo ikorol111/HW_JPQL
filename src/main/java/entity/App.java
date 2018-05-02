@@ -55,9 +55,10 @@ public class App {
 //				.getSingleResult());
 
 //Select 8 
-//		long count = em.createQuery("SELECT count(*) FROM User", Long.class).getSingleResult();
-//		long summ = em.createQuery("SELECT sum(age) FROM User", Long.class).getSingleResult();
-//		System.out.println("average age " +  "user = " + summ/count);
+//		long summ = em.createQuery("SELECT avg(age) FROM User", Long.class).getSingleResult();
+//		System.out.println("average age " +  "user = " + summ);
+		
+
 
 //Select 9	ok
 		
@@ -67,23 +68,23 @@ public class App {
 //			System.out.println(c.getCity());
 //		});
 		
-//Select 10	****
-//		em.createQuery("SELECT u FROM User u Join u.city c WHERE c.id=u.city.id AND u.id!=?1 ORDER BY c.id", User.class)
+//Select 10 ok 
+//		em.createQuery("SELECT u FROM User u JOIN  u.city c WHERE u.id NOT IN (?1) ORDER BY c.id", User.class)
 //			.setParameter(1, Arrays.asList(2, 5, 9, 12, 13, 16))
 //			.getResultList().forEach(c -> {
-//			System.out.print(c.getId());
-//			System.out.print(c.toString());
+//			System.out.print(c);
 //			System.out.println(c.getCity());
-//		});
-
+//			});
 		
-//Select 11	****
-//		em.createQuery("SELECT u FROM User u JOIN u.city c WHERE c.id=u.city.id JOIN c.country cc WHERE cc.id = c.country.id", User.class)
+		
+		//Select 11	ok
+//		em.createQuery("SELECT u FROM User u JOIN u.city c JOIN c.country cc ", User.class)
 //			.getResultList().forEach(c -> {
 //			System.out.print(c.toString());
 //			System.out.print(c.getCity());
+//			System.out.print(c.getCity().getCountry());
+//			System.out.println();
 //		});
-		
 		
 		em.getTransaction().commit();
 		em.close();
